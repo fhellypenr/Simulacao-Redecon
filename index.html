@@ -35,7 +35,7 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#e8ecf2;color:#222;font-
 .pagina{background:#fff;width:210mm;min-height:297mm;padding:10mm 12mm;box-shadow:0 4px 30px rgba(0,0,0,.15);display:flex;flex-direction:column;gap:8px;margin:0 auto}
 
 /* CABEÇALHO */
-.cabecalho{display:flex;justify-content:space-between;align-items:center;border-bottom:2.5px solid #e63329;padding-bottom:8px}
+.cabecalho{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #3d4a5c;padding-bottom:8px}
 .cabecalho img{height:52px}
 .contatos{font-size:10px;color:#333;text-align:right;line-height:1.9}
 .c-row{display:flex;align-items:center;justify-content:flex-end;gap:5px}
@@ -43,14 +43,15 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#e8ecf2;color:#222;font-
 
 /* BADGES */
 .badges{display:flex;gap:6px;flex-wrap:wrap}
-.badge{display:flex;align-items:center;gap:5px;background:#e63329;color:#fff;border-radius:4px;padding:4px 10px;font-size:11px;font-weight:700}
+.badge{display:flex;align-items:center;gap:5px;background:#3d4a5c;color:#fff;border-radius:4px;padding:4px 10px;font-size:11px;font-weight:700}
+.badge .badge-label{color:#aeb8c4;font-weight:400}
 .badge-label{font-weight:400;font-size:9.5px}
 
 /* SEC TITULO */
-.sec-titulo{background:#2d3748;color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:3px;display:inline-block}
+.sec-titulo{background:#3d4a5c;color:#fff;font-size:11px;font-weight:700;padding:5px 12px;border-radius:3px;display:block;text-align:center;letter-spacing:.4px;text-transform:uppercase}
 
 /* DISCLAIMER */
-.disclaimer{background:#fff8e1;border:1px solid #f0c040;border-radius:4px;padding:10px 14px;font-size:11px;color:#7a5c00;text-align:center;margin-top:8px}
+.disclaimer{background:#f6f8fa;border:1px solid #d4dae2;border-radius:4px;padding:10px 14px;font-size:10.5px;color:#5a6472;text-align:center;margin-top:10px}
 
 /* CARDS MODALIDADE */
 .modalidades-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -132,7 +133,7 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#e8ecf2;color:#222;font-
 .prog-bar{background:#f0f3f8;border-radius:4px;height:6px;margin-top:3px;overflow:hidden}
 .prog-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,#a81e15,#e63329)}
 .fid-badge{display:inline-flex;align-items:center;gap:3px;font-size:8px;font-weight:700;color:#e63329;margin-top:2px}
-.narrativa-box{background:#f0f3f8;border-radius:6px;padding:8px 10px;font-size:11px;color:#1a2e4a;line-height:1.6;border-left:3px solid #e63329;margin-bottom:4px}
+.narrativa-box{background:#f6f8fa;border-radius:6px;padding:8px 12px;font-size:11px;color:#3d4a5c;line-height:1.6;border-left:3px solid #5a7a5a;margin-bottom:4px}
 
 /* RODAPÉ */
 .rodape{padding-top:8px;display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid #dde;font-size:9px;color:#999;margin-top:auto}
@@ -156,106 +157,84 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#e8ecf2;color:#222;font-
   .modalidades-grid{grid-template-columns:1fr 1fr}
   .ll-grid{grid-template-columns:1fr}
 }
+
+/* ===== NOVO MODELO — TABELA COMPARATIVA (paleta neutra) ===== */
+.tabela-modalidades{width:100%;border-collapse:separate;border-spacing:0;margin-top:8px;font-size:11px}
+.tabela-modalidades thead th{
+  background:#3d4a5c;color:#fff;font-size:9.5px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.4px;padding:8px 10px;text-align:center;
+}
+.tabela-modalidades thead th:first-child{text-align:left;border-radius:5px 0 0 0}
+.tabela-modalidades thead th:last-child{border-radius:0 5px 0 0}
+.tabela-modalidades tbody td{
+  padding:10px;border-bottom:1px solid #e2e6ec;text-align:center;vertical-align:middle;
+}
+.tabela-modalidades tbody tr:nth-child(even){background:#f6f8fa}
+.tabela-modalidades tbody tr.linha-foco{background:#eef3ee}
+.tabela-modalidades tbody tr.linha-foco .mod-nome{color:#3a6b3a}
+.tabela-modalidades tbody tr:last-child td{border-bottom:none}
+.col-mod{text-align:left!important;width:22%}
+.mod-nome{font-size:12px;font-weight:800;color:#2d3748;line-height:1.2}
+.mod-chance{font-size:8.5px;color:#8a94a0;margin-top:2px}
+.cel-valor{font-size:11px;font-weight:700;color:#2d3748}
+.cel-sub{font-size:8px;color:#8a94a0;margin-top:1px}
+.cel-vazio{font-size:12px;color:#c0c6ce}
+.cel-bolso{font-size:11px;font-weight:700;color:#a87b2a}
+.cel-credito{font-size:14px;font-weight:800;color:#2d3748}
+.cel-parcela{font-size:13px;font-weight:800;color:#3d5a7a}
+.col-credito{width:20%;background:#f0f3f6}
+.col-parcela{width:18%}
+.col-lance{width:16%}
+.col-bolso{width:14%}
+.tabela-modalidades tbody tr:nth-child(even) .col-credito{background:#eaeef2}
+
+/* Lance livre — novo modelo neutro */
+.ll-neutro{border:1.5px solid #3d4a5c;border-radius:6px;margin-top:10px;overflow:hidden;max-width:640px;margin-left:auto;margin-right:auto}
+.ll-neutro-header{background:#3d4a5c;color:#fff;font-size:11px;font-weight:700;padding:6px 12px;text-align:center;letter-spacing:.4px;text-transform:uppercase}
+.ll-neutro-body{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0}
+.ll-neutro-cel{padding:10px 12px;text-align:center;border-right:1px solid #e2e6ec}
+.ll-neutro-cel:last-child{border-right:none}
+.ll-neutro-label{font-size:8px;color:#8a94a0;text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px}
+.ll-neutro-valor{font-size:15px;font-weight:800;color:#2d3748}
+.ll-neutro-valor.credito{color:#3d5a7a}
+.ll-neutro-valor.parcela{color:#3d5a7a}
+.ll-neutro-sub{font-size:8px;color:#8a94a0;margin-top:2px}
+.ll-neutro-detalhes{background:#f6f8fa;padding:6px 12px;display:flex;justify-content:space-around;font-size:9px;color:#5a6472;border-top:1px solid #e2e6ec}
+.ll-neutro-detalhes strong{color:#2d3748}
+
 @media print{
   body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact;margin:0;padding:0}
   #sidebar,#fab-calc,#fab-back{display:none!important}
   #resultado-wrap{margin-left:0!important;padding:0!important;display:block!important}
   .pagina{
     box-shadow:none!important;
-    width:200mm!important;
+    width:210mm!important;
     min-height:auto!important;
-    padding:4mm 6mm!important;
-    gap:3px!important;
-    font-size:10px!important;
+    padding:8mm 10mm!important;
+    gap:7px!important;
+    font-size:11px!important;
   }
-  .top-cards{gap:4px!important}
-  .bottom-cards{gap:4px!important}
-  .cards-wrapper{gap:4px!important}
-  .top-cards .mod-card{min-height:170px!important}
-  .bottom-cards .mod-card{min-height:155px!important}
-  .ll-compact{padding:5px 8px!important}
-  .ll-compact-credito{background:#fff!important;border:2px solid #333!important}
-  .ll-compact-credito .lc-label{color:#555!important}
-  .ll-compact-credito .lc-valor{font-size:12px!important;color:#e63329!important}
-  .ll-compact-credito .lc-sub{color:#555!important}
-  .ll-compact-parcela{background:#fff!important;border:2px solid #e63329!important}
-  .ll-compact-parcela .lc-label{color:#555!important;opacity:1!important}
-  .ll-compact-parcela .lc-valor-parc{font-size:12px!important;color:#e63329!important}
-  .ll-compact-parcela .lc-meses{color:#555!important;opacity:1!important}
-  .disclaimer{font-size:10px!important;padding:8px!important}
-  .mod-card{page-break-inside:avoid;-webkit-column-break-inside:avoid;padding:7px!important}
-  .modalidades-grid{page-break-inside:avoid;-webkit-column-break-inside:avoid}
-  .ll-grid{page-break-inside:avoid;-webkit-column-break-inside:avoid}
-  .narrativa-box{page-break-inside:avoid;-webkit-column-break-inside:avoid;font-size:9px!important;padding:5px 8px!important}
-  .disclaimer{page-break-inside:avoid;-webkit-column-break-inside:avoid;font-size:10px!important}
-  .rodape{page-break-inside:avoid;-webkit-column-break-inside:avoid}
-  .mod-titulo{font-size:11px!important;padding:4px 9px!important;background:#2d3748!important}
-  .mod-pct{font-size:11px!important}
-  .mod-row{font-size:9.5px!important;padding:2px 0!important}
-  .mod-row strong{font-size:10.5px!important}
-  .mc-label{font-size:8.5px!important}
-  .mc-valor{font-size:14px!important}
-  .mod-credito{background:#fff!important;border:2px solid #333!important}
-  .mod-credito .mc-label{color:#555!important}
-  .mod-credito .mc-valor{color:#e63329!important}
-  .ll-credito-box{background:#fff!important;border:2px solid #333!important}
-  .ll-credito-box .lc-label{color:#555!important}
-  .ll-credito-box .lc-valor{color:#e63329!important}
-  .ll-credito-box .lc-sub{color:#555!important}
-  .mod-parcela{background:#fff!important;border:2px solid #e63329!important}
-  .mod-parcela .mp-label{color:#555!important}
-  .mod-parcela .mp-valor{color:#e63329!important}
-  .mod-titulo{background:#fff!important;border:1px solid #333!important;color:#333!important}
-  .mod-pct{background:#333!important}
-  .sec-titulo{background:#333!important}
-  .narrativa-box{background:#f5f5f5!important;border-left:3px solid #333!important}
-  .narrativa-box strong{color:#333!important}
-  .ll-row.destaque strong{color:#e63329!important}
-  .mod-bolso{border:1.5px solid #999!important}
-  .ll-bolso{border:1.5px solid #999!important}
-  .foco-destaque::before{background:#333!important}
-  .mp-label{font-size:8.5px!important}
-  .mp-valor{font-size:13px!important}
-  .mod-condicao{font-size:10px!important}
-  .mod-bolso{font-size:10.5px!important}
-  .badge{font-size:9.5px!important;padding:3px 8px!important}
-  .contatos{font-size:9.5px!important;line-height:1.7!important}
+  /* Tabela em P&B */
+  .tabela-modalidades{font-size:11px!important}
+  .tabela-modalidades thead th{background:#3d4a5c!important;color:#fff!important;font-size:9.5px!important}
+  .tabela-modalidades tbody tr{page-break-inside:avoid}
+  .tabela-modalidades tbody tr:nth-child(even){background:#f2f4f7!important}
+  .tabela-modalidades tbody tr.linha-foco{background:#eef3ee!important}
+  .col-credito{background:#eef1f5!important}
+  .cel-credito{font-size:14px!important}
+  .cel-parcela{font-size:13px!important}
+  .mod-nome{font-size:12px!important}
+  /* Lance livre P&B */
+  .ll-neutro{page-break-inside:avoid}
+  .ll-neutro-header{background:#3d4a5c!important;color:#fff!important}
+  .ll-neutro-valor{font-size:15px!important}
+  .badge{background:#3d4a5c!important;color:#fff!important;font-size:11px!important}
+  .sec-titulo{background:#3d4a5c!important;color:#fff!important}
+  .narrativa-box{page-break-inside:avoid;font-size:10.5px!important}
+  .disclaimer{page-break-inside:avoid;font-size:10px!important}
+  .rodape{page-break-inside:avoid}
+  .contatos{font-size:11px!important}
   .cabecalho img{height:52px!important}
-  .sec-titulo{font-size:10px!important;padding:4px 9px!important}
-  .ll-row{font-size:9.5px!important;padding:2px 0!important}
-  .ll-credito-box .lc-valor{font-size:14px!important}
-  .ll-credito-box .lc-label{font-size:10px!important}
-  .ll-bolso .lb-valor{font-size:11px!important}
-  .ll-bolso .lb-label{font-size:10px!important}
-  .assinatura-nome{font-size:12px!important}
-  .rodape{font-size:10px!important}
-  .badges{gap:6px!important}
-  .funil-barra{height:22px!important;font-size:11px!important}
-  .funil-label{font-size:10px!important}
-  /* Scale and font sizes */
-  .pagina{font-size:13px!important;gap:6px!important}
-  .mod-card{padding:9px!important}
-  .mod-titulo{font-size:11.5px!important}
-  .mod-pct{font-size:9.5px!important}
-  .mod-row{font-size:11.5px!important;padding:3px 0!important}
-  .mod-row strong{font-size:15px!important}
-  .mc-label{font-size:9px!important}
-  .mc-valor{font-size:17px!important}
-  .mp-label{font-size:9px!important}
-  .mp-valor{font-size:15px!important}
-  .mod-condicao{font-size:9px!important}
-  .mod-bolso{font-size:9.5px!important}
-  .badges .badge{font-size:10.5px!important}
-  .narrativa-box{font-size:11.5px!important}
-  .disclaimer{font-size:9.5px!important}
-  .contatos{font-size:10.5px!important}
-  .cabecalho img{height:48px!important}
-  .sec-titulo{font-size:11.5px!important}
-  .ll-row{font-size:10.5px!important}
-  .ll-credito-box .lc-valor{font-size:19px!important}
-  .ll-bolso .lb-valor{font-size:12px!important}
-  .assinatura-nome{font-size:11.5px!important}
-}
 @page{size:A4 portrait;margin:5mm}
 </style>
 </head>
@@ -351,10 +330,10 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#e8ecf2;color:#222;font-
     <div class="cabecalho">
       <img id="logo-img" src="" alt="Redecon" style="height:52px">
       <div class="contatos">
-        <div class="c-row"><svg class="c-ico" viewBox="0 0 24 24" fill="none" stroke="#e63329" stroke-width="2.2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg><span id="p-insta"></span></div>
-        <div class="c-row"><svg class="c-ico" viewBox="0 0 24 24" fill="none" stroke="#e63329" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.63 3.4 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l.77-.77a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span id="p-tel"></span></div>
-        <div class="c-row"><svg class="c-ico" viewBox="0 0 24 24" fill="none" stroke="#e63329" stroke-width="2.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span id="p-email"></span></div>
-        <div class="c-row"><svg class="c-ico" viewBox="0 0 24 24" fill="none" stroke="#e63329" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span id="p-end"></span></div>
+        <div class="c-row"><svg class="c-ico" viewBox="0 0 24 24" fill="none" stroke="#5a6472" stroke-width="2.2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg><span id="p-insta"></span></div>
+        <div class="c-row"><svg class="c-ico" viewBox="0 0 24 24" fill="none" stroke="#5a6472" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.63 3.4 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l.77-.77a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span id="p-tel"></span></div>
+        <div class="c-row"><svg class="c-ico" viewBox="0 0 24 24" fill="none" stroke="#5a6472" stroke-width="2.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span id="p-email"></span></div>
+        <div class="c-row"><svg class="c-ico" viewBox="0 0 24 24" fill="none" stroke="#5a6472" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span id="p-end"></span></div>
       </div>
     </div>
 
@@ -369,7 +348,7 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#e8ecf2;color:#222;font-
 
     <!-- LANCE LIVRE -->
     <div id="p-lance-livre-section" style="display:none">
-      <div style="margin-top:4px;max-width:600px;margin-left:auto;margin-right:auto"><div class="sec-titulo" style="display:block;text-align:center;width:100%;border-radius:3px">Lance Livre</div></div>
+      
       <div class="ll-grid" id="p-lance-livre-cards"></div>
     </div>
 
@@ -521,123 +500,93 @@ function calcular(){
     </div>`;
   }
 
+  // ===== NOVO MODELO: TABELA COMPARATIVA =====
+  const foco = document.getElementById('f-foco').value;
+
+  // Narrativa conforme foco
+  const temLL = lanceLivreParcelas > 0;
+  const narrativa = FOCOS[foco] && FOCOS[foco].narrativa ? FOCOS[foco].narrativa([d.limitado,d.fid1,d.fid2,d.fid3], temLL) : '';
+  document.getElementById('p-narrativa').innerHTML = narrativa ? `<div class="narrativa-box">${narrativa}</div>` : '';
+
+  // Coleta dados de cada modalidade
+  const modalidades = [];
+
   // SORTEIO
   const creditoSorteio = parseFloat((credito - aditivos).toFixed(2));
   const parcelaSorteio = prazoRestSorteio>0 ? parseFloat((sdAtual/prazoRestSorteio).toFixed(2)) : 0;
-  const sorteioHTML = `<div class="mod-card destaque">
-    <div class="mod-header"><span class="mod-titulo">SORTEIO</span><span class="mod-pct">90%</span></div>
-    <div class="mod-row"><span>Lance</span><strong>—</strong></div>
-    <div class="mod-row"><span>Meses restantes</span><strong>${prazoRestSorteio}</strong></div>
-    <div class="mod-credito"><div class="mc-label">Crédito disponível</div><div class="mc-valor">${fmt(creditoSorteio)}</div></div>
-    <div class="mod-parcela"><div class="mp-label">Parcela pós-contemplação</div><div class="mp-valor">${fmt(parcelaSorteio)}</div></div>
-    <div class="mod-condicao">Parcela do mês em dia · Loteria Federal</div>
-  </div>`;
+  modalidades.push({
+    nome: 'Sorteio', chance: 90, lance: null, parcelas: null,
+    credito: creditoSorteio, parcela: parcelaSorteio, doBolso: 0,
+    meses: prazoRestSorteio, condicao: 'Parcela do mês em dia · Loteria Federal',
+    tipo: 'sorteio'
+  });
 
   // LIMITADO
-  const limitHTML = d.limitado
-    ? cardHTML('LIMITADO',85,'Parcela do mês em dia',calcLance(d.limitado,true),true,true)
-    : `<div class="mod-card mod-indisponivel"><div class="mod-header"><span class="mod-titulo">LIMITADO</span></div><div style="font-size:9px;color:#aaa;text-align:center;padding:10px 0">Não disponível neste grupo</div></div>`;
-
-  // FID 1
-  const fid1HTML = cardHTML('FIDELIDADE 1',50,'6 parcelas consecutivas em dia',calcLance(d.fid1,true),!!d.fid1,true);
-  // FID 2
-  const fid2HTML = cardHTML('FIDELIDADE 2',30,'12 parcelas consecutivas em dia',calcLance(d.fid2||0,true),!!d.fid2,true);
-  // FID 3
-  const fid3HTML = cardHTML('FIDELIDADE 3',15,'18 parcelas consecutivas em dia',calcLance(d.fid3||0,true),!!d.fid3,true);
-
-  const foco = document.getElementById('f-foco').value;
-
-  // Narrativa
-  const modsDisp = [d.limitado, d.fid1, d.fid2, d.fid3].filter(Boolean);
-  const temLL = lanceLivreParcelas > 0;
-  const narrativa = FOCOS[foco].narrativa ? FOCOS[foco].narrativa([d.limitado,d.fid1,d.fid2,d.fid3], temLL) : '';
-  const narrativaHTML = narrativa ? `<div class="narrativa-box">${narrativa}</div>` : '';
-
-  // Classes por foco
-  function focoClass(modalidade){
-    if(foco==='todas') return '';
-    if(foco==='fidelidades'){
-      if(['fid1','fid2','fid3'].includes(modalidade)) return 'foco-destaque';
-      return 'foco-fraco';
-    }
-    if(foco==='lance_livre') return 'foco-fraco';
-    return '';
+  if (d.limitado) {
+    const n = capParcelas(d.limitado);
+    const c = calcLance(n, true);
+    modalidades.push({
+      nome: 'Lance Limitado', chance: 85, lance: c.lanceVal, parcelas: n,
+      credito: c.creditoContemplado, parcela: c.parcela, doBolso: c.doBolso,
+      meses: c.prazoRestLance, condicao: 'Parcela do mês em dia', tipo: 'limitado'
+    });
   }
 
-  // Progress bar fidelidades
-  function progBar(pct){
-    return `<div class="prog-bar"><div class="prog-fill" style="width:${pct}%"></div></div>`;
-  }
-  function fidStars(n){ return '⭐'.repeat(n); }
-
-  // Rebuild cards with foco classes and fid progress
-  function cardComFoco(titulo, pct, condicao, calc, disponivel, modalidade, fidN, nParcelas, centerContent){
-    if(!disponivel) return '';
-    const cls = focoClass(modalidade);
-    const bolsoHTML = (calc&&calc.doBolso>0) ? `<div class="mod-bolso">Do bolso: ${fmt(calc.doBolso)}</div>` : '';
-    const embHTML = (modalidade!=='sorteio'&&calc&&calc.doBolso===0) ? '<div style="font-size:8px;color:#388e3c;text-align:center;margin-top:2px">✅ Lance descontado do crédito</div>' : '';
-    const fidHTML = '';
-    const parcelasTag = (nParcelas && modalidade!=='sorteio') ? `<span style="font-size:8.5px;color:#99aabb;margin-left:4px">(${nParcelas} parc.)</span>` : '';
-    return `<div class="mod-card ${cls}${centerContent?' mod-card-center':''}">
-      <div class="mod-card-top">
-        <div class="mod-header">
-          <span class="mod-titulo">${titulo}</span>
-          <span class="mod-pct">${pct}%</span>
-        </div>
-        <div class="mod-concorrencia">~${pct}% do grupo concorre nessa modalidade</div>
-        ${fidHTML}
-        ${modalidade!=='sorteio' ? `<div class="mod-row"><span>Lance${parcelasTag}</span><strong>${fmt(calc?calc.lanceVal:0)}</strong></div>` : ''}
-        <div class="mod-row"><span>Meses restantes</span><strong>${modalidade==='sorteio'?prazoRestSorteio:(calc?calc.prazoRestLance:0)}</strong></div>
-      </div>
-      <div class="mod-card-bottom">
-      <div class="mod-credito">
-        <div class="mc-label">Crédito disponível</div>
-        <div class="mc-valor">${fmt(modalidade==='sorteio'?creditoSorteio:(calc?calc.creditoContemplado:0))}</div>
-      </div>
-      <div class="mod-parcela">
-        <div class="mp-label">Parcela pós-contemplação</div>
-        <div class="mp-valor">${fmt(modalidade==='sorteio'?parcelaSorteio:(calc?calc.parcela:0))}</div>
-      </div>
-      ${bolsoHTML}${embHTML}
-      <div class="mod-condicao">${condicao}</div>
-      </div>
-    </div>`;
-  }
-
-  const sorteioCard = cardComFoco('SORTEIO',90,'Parcela do mês em dia · Loteria Federal',null,true,'sorteio',0,null,false);
-  const nLimit = capParcelas(d.limitado);
-  const limitCard = d.limitado ? cardComFoco('LIMITADO',85,'Parcela do mês em dia',calcLance(nLimit,true),true,'limitado',0,nLimit) : '';
   // Nomenclatura e percentuais conforme regra do grupo
-  // Padrão: 6/12/18 meses → 50/30/15% | Nova: 12/18/24 meses → 30/15/8%
   const fidMeses = d.fidNova ? [12, 18, 24] : [6, 12, 18];
   const fidPcts  = d.fidNova ? [30, 15, 8] : [50, 30, 15];
-  const nFid1 = capParcelas(d.fid1);
-  const fid1Card = d.fid1 ? cardComFoco('FIDELIDADE 1',fidPcts[0],fidMeses[0]+' parcelas consecutivas em dia',calcLance(nFid1,true),true,'fid1',1,nFid1) : '';
-  const nFid2 = capParcelas(d.fid2);
-  const fid2Card = d.fid2 ? cardComFoco('FIDELIDADE 2',fidPcts[1],fidMeses[1]+' parcelas consecutivas em dia',calcLance(nFid2,true),true,'fid2',2,nFid2) : '';
-  const nFid3 = capParcelas(d.fid3);
-  const fid3Card = d.fid3 ? cardComFoco('FIDELIDADE 3',fidPcts[2],fidMeses[2]+' parcelas consecutivas em dia',calcLance(nFid3,true),true,'fid3',3,nFid3) : '';
 
-  document.getElementById('p-narrativa').innerHTML = narrativaHTML;
-  const fidList = [fid1Card, fid2Card, fid3Card].filter(c => c);
-  const fidCount = fidList.length;
-  const fidCards = fidList.join('');
-  let topHTML, bottomHTML;
+  // FIDELIDADES
+  [['fid1', d.fid1, 1], ['fid2', d.fid2, 2], ['fid3', d.fid3, 3]].forEach(([key, val, idx]) => {
+    if (val) {
+      const n = capParcelas(val);
+      const c = calcLance(n, true);
+      modalidades.push({
+        nome: 'Fidelidade ' + idx, chance: fidPcts[idx-1], lance: c.lanceVal, parcelas: n,
+        credito: c.creditoContemplado, parcela: c.parcela, doBolso: c.doBolso,
+        meses: c.prazoRestLance, condicao: fidMeses[idx-1] + ' parcelas consecutivas em dia',
+        tipo: 'fid' + idx, foco: foco === 'fidelidades'
+      });
+    }
+  });
 
-  if (fidCount <= 1) {
-    // 1 fidelidade ou nenhuma: tudo em 1 linha (Sorteio + Limitado + Fid1)
-    const allCards = sorteioCard + (limitCard||'') + fidCards;
-    const totalCards = [sorteioCard, limitCard, fidCards].filter(c=>c).length;
-    const colClass = totalCards === 3 ? 'grid-3col' : totalCards === 2 ? 'grid-2col' : 'grid-1col';
-    topHTML = `<div class="all-cards ${colClass}">${allCards}</div>`;
-    bottomHTML = '';
-  } else {
-    // 2+ fidelidades: Sorteio+Limitado em cima, fidelidades embaixo
-    topHTML = `<div class="top-cards">${sorteioCard}${limitCard}</div>`;
-    const bottomClass = fidCount === 2 ? 'bottom-cards-2' : 'bottom-cards-3';
-    bottomHTML = `<div class="bottom-cards ${bottomClass}">${fidCards}</div>`;
-  }
-  document.getElementById('p-modalidades').innerHTML = topHTML + bottomHTML;
+  // Monta a tabela
+  const linhas = modalidades.map(m => {
+    const focoClass = (foco === 'fidelidades' && m.tipo.startsWith('fid')) ? 'linha-foco' : '';
+    const lanceCell = m.lance !== null
+      ? `<div class="cel-valor">${fmt(m.lance)}</div><div class="cel-sub">${m.parcelas} parcelas</div>`
+      : '<div class="cel-vazio">—</div>';
+    const bolsoCell = m.doBolso > 0
+      ? `<div class="cel-bolso">${fmt(m.doBolso)}</div>`
+      : (m.tipo !== 'sorteio' ? '<div class="cel-sub" style="color:#5a8a5a">No crédito</div>' : '<div class="cel-vazio">—</div>');
+    return `
+      <tr class="${focoClass}">
+        <td class="col-mod">
+          <div class="mod-nome">${m.nome}</div>
+          <div class="mod-chance">~${m.chance}% concorrência</div>
+        </td>
+        <td class="col-lance">${lanceCell}</td>
+        <td class="col-bolso">${bolsoCell}</td>
+        <td class="col-credito"><div class="cel-credito">${fmt(m.credito)}</div></td>
+        <td class="col-parcela"><div class="cel-parcela">${fmt(m.parcela)}</div><div class="cel-sub">${m.meses} meses</div></td>
+      </tr>`;
+  }).join('');
+
+  const tabelaHTML = `
+    <table class="tabela-modalidades">
+      <thead>
+        <tr>
+          <th class="col-mod">Modalidade</th>
+          <th class="col-lance">Lance</th>
+          <th class="col-bolso">Do bolso</th>
+          <th class="col-credito">Crédito disponível</th>
+          <th class="col-parcela">Parcela pós</th>
+        </tr>
+      </thead>
+      <tbody>${linhas}</tbody>
+    </table>`;
+
+  document.getElementById('p-modalidades').innerHTML = tabelaHTML;
 
   // LANCE LIVRE
   const llSec = document.getElementById('p-lance-livre-section');
@@ -653,28 +602,32 @@ function calcular(){
       const doBolsoHTML = ll.doBolso > 0
         ? `<div class="ll-compact-dado-row"><div class="ll-compact-dado-label">Do bolso</div><div class="ll-compact-dado-valor destaque">${fmt(ll.doBolso)}</div></div>`
         : `<div class="ll-compact-dado-row"><div class="ll-compact-dado-label">Do bolso</div><div class="ll-compact-dado-valor" style="color:#388e3c">Lance 100% embutido</div></div>`;
+      const bolsoLLNeutro = ll.doBolso > 0
+        ? `<span>Do bolso: <strong>${fmt(ll.doBolso)}</strong></span>`
+        : `<span>Lance embutido no crédito</span>`;
       llCards.innerHTML = `
-        <div class="ll-compact">
-          <div class="ll-compact-credito">
-            <div class="lc-label">Crédito disponível</div>
-            <div class="lc-valor">${fmt(ll.creditoContemplado)}</div>
-            <div class="lc-sub">após contemplação</div>
-          </div>
-          <div class="ll-compact-dados">
-            <div class="ll-compact-dado-row">
-              <div class="ll-compact-dado-label">Lance (${parc} parcelas)</div>
-              <div class="ll-compact-dado-valor">${fmt(ll.lanceVal)}</div>
+        <div class="ll-neutro">
+          <div class="ll-neutro-header">Lance Livre</div>
+          <div class="ll-neutro-body">
+            <div class="ll-neutro-cel">
+              <div class="ll-neutro-label">Crédito disponível</div>
+              <div class="ll-neutro-valor credito">${fmt(ll.creditoContemplado)}</div>
+              <div class="ll-neutro-sub">após contemplação</div>
             </div>
-            <div class="ll-compact-dado-row">
-              <div class="ll-compact-dado-label">Embutido (30%)</div>
-              <div class="ll-compact-dado-valor">${usaEmbutidoLL&&!d.especial?fmt(lanceEmbutido):'Não utilizado'}</div>
+            <div class="ll-neutro-cel">
+              <div class="ll-neutro-label">Lance ofertado</div>
+              <div class="ll-neutro-valor">${fmt(ll.lanceVal)}</div>
+              <div class="ll-neutro-sub">${parc} parcelas</div>
             </div>
-            ${doBolsoHTML}
+            <div class="ll-neutro-cel">
+              <div class="ll-neutro-label">Parcela mensal</div>
+              <div class="ll-neutro-valor parcela">${fmt(ll.parcela)}</div>
+              <div class="ll-neutro-sub">${ll.prazoRestLance} meses restantes</div>
+            </div>
           </div>
-          <div class="ll-compact-parcela">
-            <div class="lc-label">Parcela mensal</div>
-            <div class="lc-valor-parc">${fmt(ll.parcela)}</div>
-            <div class="lc-meses">${ll.prazoRestLance} meses restantes</div>
+          <div class="ll-neutro-detalhes">
+            <span>Embutido (30%): <strong>${usaEmbutidoLL&&!d.especial?fmt(lanceEmbutido):'Não usado'}</strong></span>
+            ${bolsoLLNeutro}
           </div>
         </div>`;
     } else {
