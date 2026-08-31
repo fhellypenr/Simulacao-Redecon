@@ -42,7 +42,11 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#e8ecf2;color:#222;font-
 .c-ico{width:11px;height:11px;flex-shrink:0}
 
 /* BADGES */
-.badges{display:flex;gap:6px;flex-wrap:wrap}
+.badges{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1.5px solid #1e3460;border-radius:6px;overflow:hidden;margin-top:2px}
+.info-bloco{padding:7px 10px;text-align:center;border-right:1px solid #dde3ec;display:flex;flex-direction:column;gap:2px;justify-content:center}
+.info-bloco:last-child{border-right:none}
+.info-label{font-size:8px;color:#8a94a0;text-transform:uppercase;letter-spacing:.5px;font-weight:600}
+.info-valor{font-size:11.5px;color:#1e3460;font-weight:800;line-height:1.2}
 .badge{display:flex;align-items:center;gap:5px;background:#1e3460;color:#fff;border-radius:4px;padding:4px 10px;font-size:11px;font-weight:700}
 .badge .badge-label{color:#aeb8c4;font-weight:400}
 .badge-label{font-weight:400;font-size:9.5px}
@@ -158,35 +162,37 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#e8ecf2;color:#222;font-
   .ll-grid{grid-template-columns:1fr}
 }
 
-/* ===== NOVO MODELO — TABELA COMPARATIVA (paleta neutra) ===== */
-.tabela-modalidades{width:100%;border-collapse:separate;border-spacing:0;margin-top:8px;font-size:11px}
-.tabela-modalidades thead th{
-  background:#1e3460;color:#fff;font-size:9.5px;font-weight:700;
-  text-transform:uppercase;letter-spacing:.4px;padding:8px 10px;text-align:center;
+/* ===== MODELO CARDS COM MOLDURA (paleta Redecon) ===== */
+/* Grid comum: nome (maior) + 4 colunas iguais */
+.mod-cabecalho, .mod-linha-card{
+  display:grid;
+  grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;
+  align-items:center;
 }
-.tabela-modalidades thead th:first-child{text-align:left;border-radius:5px 0 0 0}
-.tabela-modalidades thead th:last-child{border-radius:0 5px 0 0}
-.tabela-modalidades tbody td{
-  padding:10px;border-bottom:1px solid #e2e6ec;text-align:center;vertical-align:middle;
+.mod-cabecalho{
+  background:#1e3460;color:#fff;border-radius:6px;
+  padding:8px 12px;margin-top:8px;margin-bottom:6px;
 }
-.tabela-modalidades tbody tr:nth-child(even){background:#f6f8fa}
-.tabela-modalidades tbody tr.linha-foco{background:#eef3ee}
-.tabela-modalidades tbody tr.linha-foco .mod-nome{color:#3a6b3a}
-.tabela-modalidades tbody tr:last-child td{border-bottom:none}
-.col-mod{text-align:left!important;width:22%}
-.mod-nome{font-size:14px;font-weight:800;color:#2d3748;line-height:1.2}
+.mod-cabecalho .mc-col-nome, .mod-cabecalho .mc-col{
+  font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;text-align:center;color:#fff;
+}
+.mod-cabecalho .mc-col-nome{text-align:left}
+.mod-linha-card{
+  border:1.5px solid #d4dae4;border-radius:6px;
+  padding:11px 12px;margin-bottom:6px;background:#fff;
+}
+.mod-linha-card.card-foco{border-color:#1e3460;border-width:2px;background:#f7f9fc}
+.mc-col-nome{text-align:left}
+.mc-col{text-align:center}
+.mod-nome{font-size:14px;font-weight:800;color:#1e3460;line-height:1.2}
 .mod-chance{font-size:9px;color:#8a94a0;margin-top:2px}
-.cel-valor{font-size:11px;font-weight:700;color:#2d3748}
-.cel-sub{font-size:8.5px;color:#8a94a0;margin-top:1px}
-.cel-vazio{font-size:12px;color:#c0c6ce}
-.cel-bolso{font-size:11px;font-weight:700;color:#a87b2a}
+.cel-valor{font-size:11.5px;font-weight:700;color:#1e3460}
+.cel-sub{font-size:9px;color:#6a7480;margin-top:2px;font-weight:500}
+.cel-sub-forte{font-size:9px;color:#4a7a4a;font-weight:600;line-height:1.3}
+.cel-vazio{font-size:14px;color:#c0c6ce}
+.cel-bolso{font-size:11.5px;font-weight:700;color:#a87b2a}
 .cel-credito{font-size:15px;font-weight:800;color:#1e3460}
 .cel-parcela{font-size:12.5px;font-weight:800;color:#1e3460}
-.col-credito{width:20%;background:#f0f3f6}
-.col-parcela{width:18%}
-.col-lance{width:16%}
-.col-bolso{width:14%}
-.tabela-modalidades tbody tr:nth-child(even) .col-credito{background:#eaeef2}
 
 /* Lance livre — novo modelo neutro */
 .ll-neutro{border:1.5px solid #1e3460;border-radius:6px;margin-top:10px;overflow:hidden;max-width:640px;margin-left:auto;margin-right:auto}
@@ -212,16 +218,22 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#e8ecf2;color:#222;font-
     gap:7px!important;
     font-size:11px!important;
   }
-  /* Tabela em P&B */
-  .tabela-modalidades{font-size:11px!important}
-  .tabela-modalidades thead th{background:#1e3460!important;color:#fff!important;font-size:9.5px!important}
-  .tabela-modalidades tbody tr{page-break-inside:avoid}
-  .tabela-modalidades tbody tr:nth-child(even){background:#f2f4f7!important}
-  .tabela-modalidades tbody tr.linha-foco{background:#eef3ee!important}
-  .col-credito{background:#eef1f5!important}
-  .cel-credito{font-size:14px!important}
-  .cel-parcela{font-size:13px!important}
-  .mod-nome{font-size:12px!important}
+  /* Cards com moldura P&B */
+  .mod-cabecalho{background:#1e3460!important;color:#fff!important;page-break-inside:avoid}
+  .mod-cabecalho .mc-col-nome,.mod-cabecalho .mc-col{color:#fff!important}
+  .mod-linha-card{page-break-inside:avoid;border:1.5px solid #b8c0cc!important}
+  .mod-linha-card.card-foco{border-color:#1e3460!important;border-width:2px!important;background:#f4f6f9!important}
+  .mod-nome{font-size:14px!important;color:#1e3460!important}
+  .mod-chance{font-size:9px!important;color:#6a7480!important}
+  .cel-valor{font-size:11.5px!important;color:#1e3460!important}
+  .cel-sub{font-size:9px!important;color:#5a6472!important}
+  .cel-sub-forte{font-size:9px!important;color:#3a6a3a!important}
+  .cel-credito{font-size:15px!important;color:#1e3460!important}
+  .cel-parcela{font-size:12.5px!important;color:#1e3460!important}
+  .cel-bolso{font-size:11.5px!important;color:#8a6420!important}
+  .info-bloco{border-right:1px solid #ccd2dc!important}
+  .info-valor{color:#1e3460!important}
+  .badges{border:1.5px solid #1e3460!important}
   /* Lance livre P&B */
   .ll-neutro{page-break-inside:avoid}
   .ll-neutro-header{background:#1e3460!important;color:#fff!important}
@@ -450,11 +462,11 @@ function calcular(){
   const cota = document.getElementById('f-cota').value||'—';
   const bem = d.bem==='imovel'?'Imóvel':'Automóvel';
   document.getElementById('p-badges').innerHTML = `
-    <div class="badge"><span class="badge-label">Cliente:</span>&nbsp;${nome}</div>
-    <div class="badge"><span class="badge-label">Grupo:</span>&nbsp;${g} · Cota ${cota}</div>
-    <div class="badge"><span class="badge-label">Bem:</span>&nbsp;${bem}</div>
-    <div class="badge"><span class="badge-label">Crédito:</span>&nbsp;${fmt(credito)}</div>
-    <div class="badge"><span class="badge-label">Referência:</span>&nbsp;${MESES[mes]}/${ano}</div>`;
+    <div class="info-bloco"><div class="info-label">Cliente</div><div class="info-valor">${nome}</div></div>
+    <div class="info-bloco"><div class="info-label">Grupo · Cota</div><div class="info-valor">${g} · ${cota}</div></div>
+    <div class="info-bloco"><div class="info-label">Bem</div><div class="info-valor">${bem}</div></div>
+    <div class="info-bloco"><div class="info-label">Crédito</div><div class="info-valor">${fmt(credito)}</div></div>
+    <div class="info-bloco"><div class="info-label">Referência</div><div class="info-valor">${MESES[mes]}/${ano}</div></div>`;
 
   // Calcula modalidades
   // Cap parcelas pelo prazo restante do grupo
@@ -550,48 +562,57 @@ function calcular(){
     }
   });
 
-  // Monta a tabela
-  const linhas = modalidades.map(m => {
-    const focoClass = (foco === 'fidelidades' && m.tipo.startsWith('fid')) ? 'linha-foco' : '';
+  // Adiciona Lance Livre como modalidade normal (se houver)
+  if (lanceLivreParcelas > 0) {
+    const parcLL = Math.min(lanceLivreParcelas, prazoRestante);
+    const cLL = calcLance(parcLL, usaEmbutidoLL && !d.especial);
+    modalidades.push({
+      nome: 'Lance Livre', chance: null, lance: cLL.lanceVal, parcelas: parcLL,
+      credito: cLL.creditoContemplado, parcela: cLL.parcela, doBolso: cLL.doBolso,
+      meses: cLL.prazoRestLance, condicao: 'Recurso próprio', tipo: 'livre'
+    });
+  }
+
+  // Cabeçalho de colunas (uma vez)
+  const cabecalhoHTML = `
+    <div class="mod-cabecalho">
+      <div class="mc-col-nome">Modalidade</div>
+      <div class="mc-col">Lance Total Ofertado</div>
+      <div class="mc-col">Do Bolso</div>
+      <div class="mc-col">Crédito Líquido</div>
+      <div class="mc-col">Parcela Pós</div>
+    </div>`;
+
+  // Cada modalidade = um card com moldura
+  const cards = modalidades.map(m => {
+    const isFoco = (foco === 'fidelidades' && m.tipo.startsWith('fid'));
+    const focoClass = isFoco ? ' card-foco' : '';
+    const chanceHTML = m.chance !== null ? `<div class="mod-chance">~${m.chance}% concorrência</div>` : '<div class="mod-chance">Oferta livre</div>';
     const lanceCell = m.lance !== null
       ? `<div class="cel-valor">${fmt(m.lance)}</div><div class="cel-sub">${m.parcelas} parcelas</div>`
       : '<div class="cel-vazio">—</div>';
     const bolsoCell = m.doBolso > 0
       ? `<div class="cel-bolso">${fmt(m.doBolso)}</div>`
-      : (m.tipo !== 'sorteio' ? '<div class="cel-sub" style="color:#5a8a5a;font-weight:600">Descontado<br>do crédito</div>' : '<div class="cel-vazio">—</div>');
+      : (m.tipo !== 'sorteio' ? '<div class="cel-sub-forte">Descontado do crédito</div>' : '<div class="cel-vazio">—</div>');
     return `
-      <tr class="${focoClass}">
-        <td class="col-mod">
+      <div class="mod-linha-card${focoClass}">
+        <div class="mc-col-nome">
           <div class="mod-nome">${m.nome}</div>
-          <div class="mod-chance">~${m.chance}% concorrência</div>
-        </td>
-        <td class="col-lance">${lanceCell}</td>
-        <td class="col-bolso">${bolsoCell}</td>
-        <td class="col-credito"><div class="cel-credito">${fmt(m.credito)}</div></td>
-        <td class="col-parcela"><div class="cel-parcela">${fmt(m.parcela)}</div><div class="cel-sub">${m.meses} meses</div></td>
-      </tr>`;
+          ${chanceHTML}
+        </div>
+        <div class="mc-col">${lanceCell}</div>
+        <div class="mc-col">${bolsoCell}</div>
+        <div class="mc-col"><div class="cel-credito">${fmt(m.credito)}</div></div>
+        <div class="mc-col"><div class="cel-parcela">${fmt(m.parcela)}</div><div class="cel-sub">${m.meses} meses</div></div>
+      </div>`;
   }).join('');
 
-  const tabelaHTML = `
-    <table class="tabela-modalidades">
-      <thead>
-        <tr>
-          <th class="col-mod">Modalidade</th>
-          <th class="col-lance">Lance Total Ofertado</th>
-          <th class="col-bolso">Do Bolso</th>
-          <th class="col-credito">Crédito Líquido</th>
-          <th class="col-parcela">Parcela Pós</th>
-        </tr>
-      </thead>
-      <tbody>${linhas}</tbody>
-    </table>`;
-
-  document.getElementById('p-modalidades').innerHTML = tabelaHTML;
+  document.getElementById('p-modalidades').innerHTML = cabecalhoHTML + cards;
 
   // LANCE LIVRE
   const llSec = document.getElementById('p-lance-livre-section');
   const llCards = document.getElementById('p-lance-livre-cards');
-  if(lanceLivreParcelas>0 || foco==='lance_livre'){
+  if(false){
     llSec.style.display='block';
     const parc = lanceLivreParcelas>0 ? Math.min(lanceLivreParcelas, prazoRestante) : 0;
     if(parc>0){
