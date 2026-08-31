@@ -137,7 +137,7 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#e8ecf2;color:#222;font-
 .prog-bar{background:#f0f3f8;border-radius:4px;height:6px;margin-top:3px;overflow:hidden}
 .prog-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,#a81e15,#e63329)}
 .fid-badge{display:inline-flex;align-items:center;gap:3px;font-size:8px;font-weight:700;color:#e63329;margin-top:2px}
-.narrativa-box{background:#f6f8fa;border-radius:6px;padding:8px 12px;font-size:11px;color:#1e3460;line-height:1.6;border-left:3px solid #5a7a5a;margin-bottom:4px}
+.narrativa-box{background:#f6f8fa;border-radius:6px;padding:8px 12px;font-size:11px;color:#1e3460;line-height:1.6;text-align:center;margin-bottom:4px}
 
 /* RODAPÉ */
 .rodape{padding-top:8px;display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid #dde;font-size:9px;color:#999;margin-top:auto}
@@ -189,6 +189,7 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#e8ecf2;color:#222;font-
 .cel-valor{font-size:11.5px;font-weight:700;color:#1e3460}
 .cel-sub{font-size:9px;color:#6a7480;margin-top:2px;font-weight:500}
 .cel-sub-forte{font-size:9px;color:#4a7a4a;font-weight:600;line-height:1.3}
+.cel-embutido{color:#a87b2a!important;font-weight:600;margin-top:1px}
 .cel-vazio{font-size:14px;color:#c0c6ce}
 .cel-bolso{font-size:11.5px;font-weight:700;color:#a87b2a}
 .cel-credito{font-size:15px;font-weight:800;color:#1e3460}
@@ -228,6 +229,7 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#e8ecf2;color:#222;font-
   .cel-valor{font-size:11.5px!important;color:#1e3460!important}
   .cel-sub{font-size:9px!important;color:#5a6472!important}
   .cel-sub-forte{font-size:9px!important;color:#3a6a3a!important}
+  .cel-embutido{color:#8a6420!important}
   .cel-credito{font-size:15px!important;color:#1e3460!important}
   .cel-parcela{font-size:12.5px!important;color:#1e3460!important}
   .cel-bolso{font-size:11.5px!important;color:#8a6420!important}
@@ -540,7 +542,7 @@ function calcular(){
     modalidades.push({
       nome: 'Lance Limitado', chance: 85, lance: c.lanceVal, parcelas: n,
       credito: c.creditoContemplado, parcela: c.parcela, doBolso: c.doBolso,
-      meses: c.prazoRestLance, condicao: 'Parcela do mês em dia', tipo: 'limitado'
+      embutido: lanceEmbutido, meses: c.prazoRestLance, condicao: 'Parcela do mês em dia', tipo: 'limitado'
     });
   }
 
@@ -556,7 +558,7 @@ function calcular(){
       modalidades.push({
         nome: 'Fidelidade ' + idx, chance: fidPcts[idx-1], lance: c.lanceVal, parcelas: n,
         credito: c.creditoContemplado, parcela: c.parcela, doBolso: c.doBolso,
-        meses: c.prazoRestLance, condicao: fidMeses[idx-1] + ' parcelas consecutivas em dia',
+        embutido: lanceEmbutido, meses: c.prazoRestLance, condicao: fidMeses[idx-1] + ' parcelas consecutivas em dia',
         tipo: 'fid' + idx, foco: foco === 'fidelidades'
       });
     }
@@ -569,7 +571,7 @@ function calcular(){
     modalidades.push({
       nome: 'Lance Livre', chance: null, lance: cLL.lanceVal, parcelas: parcLL,
       credito: cLL.creditoContemplado, parcela: cLL.parcela, doBolso: cLL.doBolso,
-      meses: cLL.prazoRestLance, condicao: 'Recurso próprio', tipo: 'livre'
+      embutido: (usaEmbutidoLL && !d.especial) ? lanceEmbutido : 0, meses: cLL.prazoRestLance, condicao: 'Recurso próprio', tipo: 'livre'
     });
   }
 
@@ -588,8 +590,11 @@ function calcular(){
     const isFoco = (foco === 'fidelidades' && m.tipo.startsWith('fid'));
     const focoClass = isFoco ? ' card-foco' : '';
     const chanceHTML = m.chance !== null ? `<div class="mod-chance">~${m.chance}% concorrência</div>` : '<div class="mod-chance">Oferta livre</div>';
+    const embutidoInfo = (m.lance !== null && m.doBolso > 0 && m.embutido > 0)
+      ? `<div class="cel-sub cel-embutido">Embutido: ${fmt(m.embutido)}</div>`
+      : '';
     const lanceCell = m.lance !== null
-      ? `<div class="cel-valor">${fmt(m.lance)}</div><div class="cel-sub">${m.parcelas} parcelas</div>`
+      ? `<div class="cel-valor">${fmt(m.lance)}</div><div class="cel-sub">${m.parcelas} parcelas</div>${embutidoInfo}`
       : '<div class="cel-vazio">—</div>';
     const bolsoCell = m.doBolso > 0
       ? `<div class="cel-bolso">${fmt(m.doBolso)}</div>`
