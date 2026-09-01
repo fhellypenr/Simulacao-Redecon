@@ -186,6 +186,7 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#e8ecf2;color:#222;font-
 .mc-col{text-align:center}
 .mod-nome{font-size:14px;font-weight:800;color:#1e3460;line-height:1.2}
 .mod-chance{font-size:9px;color:#8a94a0;margin-top:2px}
+.mod-condicao-txt{font-size:8.5px;color:#5a8a5a;margin-top:3px;font-style:italic;line-height:1.3}
 .cel-valor{font-size:11.5px;font-weight:700;color:#1e3460}
 .cel-sub{font-size:9px;color:#6a7480;margin-top:2px;font-weight:500}
 .cel-sub-forte{font-size:9px;color:#4a7a4a;font-weight:600;line-height:1.3}
@@ -226,6 +227,7 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#e8ecf2;color:#222;font-
   .mod-linha-card.card-foco{border-color:#1e3460!important;border-width:2px!important;background:#f4f6f9!important}
   .mod-nome{font-size:14px!important;color:#1e3460!important}
   .mod-chance{font-size:9px!important;color:#6a7480!important}
+  .mod-condicao-txt{font-size:8.5px!important;color:#3a6a3a!important}
   .cel-valor{font-size:11.5px!important;color:#1e3460!important}
   .cel-sub{font-size:9px!important;color:#5a6472!important}
   .cel-sub-forte{font-size:9px!important;color:#3a6a3a!important}
@@ -590,6 +592,7 @@ function calcular(){
     const isFoco = (foco === 'fidelidades' && m.tipo.startsWith('fid'));
     const focoClass = isFoco ? ' card-foco' : '';
     const chanceHTML = m.chance !== null ? `<div class="mod-chance">~${m.chance}% concorrência</div>` : '<div class="mod-chance">Oferta livre</div>';
+    const condicaoHTML = m.condicao ? `<div class="mod-condicao-txt">${m.condicao}</div>` : '';
     const embutidoInfo = (m.lance !== null && m.doBolso > 0 && m.embutido > 0)
       ? `<div class="cel-sub cel-embutido">Embutido: ${fmt(m.embutido)}</div>`
       : '';
@@ -604,6 +607,7 @@ function calcular(){
         <div class="mc-col-nome">
           <div class="mod-nome">${m.nome}</div>
           ${chanceHTML}
+          ${condicaoHTML}
         </div>
         <div class="mc-col">${lanceCell}</div>
         <div class="mc-col">${bolsoCell}</div>
