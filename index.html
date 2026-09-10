@@ -208,6 +208,11 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#e8ecf2;color:#222;font-
 .ll-bloco-linha.destaque strong{font-size:14px;font-weight:800}
 .ll-bloco-linha.destaque span{font-weight:600;color:#1e3460}
 
+/* Nota de ofertas automáticas */
+.nota-lances{border:1px solid #d4dae2;border-left:3px solid #1e3460;border-radius:0 4px 4px 0;padding:8px 12px;margin-top:10px;font-size:10.5px;color:#3a4452;line-height:1.55}
+.nota-lances-tit{font-weight:700;color:#1e3460;margin-bottom:3px}
+.nota-lances p+p{margin-top:3px}
+
 /* Observação por modalidade */
 .mod-obs{grid-column:1/-1;margin-top:9px;padding:6px 10px;background:#f6f8fa;border-left:3px solid #e63329;border-radius:0 4px 4px 0;font-size:10px;color:#3a4452;line-height:1.5;text-align:left;display:flex;gap:6px;align-items:flex-start}
 .mod-obs-rot{font-weight:700;color:#1e3460;white-space:nowrap;flex-shrink:0}
@@ -263,6 +268,7 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#e8ecf2;color:#222;font-
   .cabecalho img{height:52px!important}
   .mod-obs{background:#fff!important;border:1px solid #b8c0cc!important;border-left:3px solid #1e3460!important;color:#222!important;font-size:10px!important}
   .mod-obs-rot{color:#1e3460!important}
+  .nota-lances{page-break-inside:avoid;background:#fff!important;border:1px solid #b8c0cc!important;border-left:3px solid #1e3460!important;color:#222!important;font-size:10px!important}
 }
 @page{size:A4 portrait;margin:5mm}
 </style>
@@ -346,6 +352,9 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#e8ecf2;color:#222;font-
   <div class="sec-label">Observações nas modalidades (opcional)</div>
   <p class="nota" style="margin-top:0">Ative a modalidade e escreva. O texto aparece junto dela na simulação.</p>
   <div id="obs-lista"></div>
+  <label class="obs-toggle" style="margin-top:10px">
+    <input type="checkbox" id="chk-nota-lances" checked onchange="obsLive()"> Incluir nota sobre como ofertamos os lances
+  </label>
 
   <div class="divider"></div>
   <div id="csv-status" class="nota" style="color:#aabbd0;margin-bottom:4px">⏳ Sincronizando planilha de grupos...</div>
@@ -385,6 +394,9 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#e8ecf2;color:#222;font-
       
       <div class="ll-grid" id="p-lance-livre-cards"></div>
     </div>
+
+    <!-- NOTA OFERTAS AUTOMÁTICAS -->
+    <div class="nota-lances" id="p-nota-lances" style="display:none"></div>
 
     <!-- DISCLAIMER -->
     <div class="disclaimer">Simulação estimada. Valores sujeitos a variações. Não representa promessa de contemplação.</div>
@@ -640,6 +652,24 @@ function calcular(){
   }).join('');
 
   document.getElementById('p-modalidades').innerHTML = cabecalhoHTML + cards;
+
+  // Nota: lances ofertados automaticamente (conforme o grupo)
+  const notaEl = document.getElementById('p-nota-lances');
+  if (document.getElementById('chk-nota-lances').checked) {
+    const auto = modalidades
+      .filter(m => m.tipo === 'limitado' || m.tipo.startsWith('fid'))
+      .map(m => m.tipo === 'limitado' ? 'Limitado' : m.nome);
+    const listaAuto = auto.length > 1 ? auto.slice(0,-1).join(', ') + ' e ' + auto[auto.length-1] : (auto[0] || '');
+    const pAuto = auto.length
+      ? `<p>${auto.length > 1 ? 'Os lances' : 'O lance'} <strong>${listaAuto}</strong> ${auto.length > 1 ? 'já são ofertados' : 'já é ofertado'} automaticamente pela Redecon, desde que cumpridas as condições ${auto.length > 1 ? 'de cada modalidade' : 'da modalidade'}. O critério de desempate é a proximidade da cota em relação ao número sorteado.</p>`
+      : '';
+    const pLivre = `<p>O <strong>Lance Livre</strong> só é ofertado com autorização do cliente, quando o valor com recurso próprio supera os demais lances.</p>`;
+    notaEl.innerHTML = `<div class="nota-lances-tit">Como ofertamos os lances</div>${pAuto}${pLivre}`;
+    notaEl.style.display = 'block';
+  } else {
+    notaEl.innerHTML = '';
+    notaEl.style.display = 'none';
+  }
 
   // LANCE LIVRE
   const llSec = document.getElementById('p-lance-livre-section');
