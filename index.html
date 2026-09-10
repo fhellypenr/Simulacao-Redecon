@@ -208,6 +208,15 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#e8ecf2;color:#222;font-
 .ll-bloco-linha.destaque strong{font-size:14px;font-weight:800}
 .ll-bloco-linha.destaque span{font-weight:600;color:#1e3460}
 
+/* Observação por modalidade */
+.mod-obs{grid-column:1/-1;margin-top:9px;padding:6px 10px;background:#f6f8fa;border-left:3px solid #e63329;border-radius:0 4px 4px 0;font-size:10px;color:#3a4452;line-height:1.5;white-space:pre-line;text-align:left}
+.mod-obs-rot{font-weight:700;color:#1e3460}
+#sidebar textarea{width:100%;padding:6px 8px;border:1px solid #2e4870;background:#1e3655;color:#fff;border-radius:4px;font-size:11.5px;font-family:inherit;line-height:1.4;resize:vertical;margin-top:4px}
+#sidebar textarea:focus{outline:none;border-color:#e63329}
+#sidebar textarea::placeholder{color:#6f7f94}
+#sidebar .obs-toggle{display:flex;align-items:center;gap:6px;margin-top:6px;margin-bottom:0;font-size:10.5px;color:#c7d2e0;cursor:pointer}
+#sidebar .obs-toggle input{width:auto;accent-color:#e63329}
+
 @media print{
   body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact;margin:0;padding:0}
   #sidebar,#fab-calc,#fab-back{display:none!important}
@@ -251,6 +260,9 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#e8ecf2;color:#222;font-
   .rodape{page-break-inside:avoid}
   .contatos{font-size:11px!important}
   .cabecalho img{height:52px!important}
+  .mod-obs{background:#fff!important;border:1px solid #b8c0cc!important;border-left:3px solid #1e3460!important;color:#222!important;font-size:10px!important}
+  .mod-obs-rot{color:#1e3460!important}
+}
 @page{size:A4 portrait;margin:5mm}
 </style>
 </head>
@@ -330,6 +342,11 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#e8ecf2;color:#222;font-
   </label>
 
   <div class="divider"></div>
+  <div class="sec-label">Observações nas modalidades (opcional)</div>
+  <p class="nota" style="margin-top:0">Ative a modalidade e escreva. O texto aparece junto dela na simulação.</p>
+  <div id="obs-lista"></div>
+
+  <div class="divider"></div>
   <div id="csv-status" class="nota" style="color:#aabbd0;margin-bottom:4px">⏳ Sincronizando planilha de grupos...</div>
   <button id="btn-calcular" onclick="calcular()">📊 Calcular Simulação</button>
   <button id="btn-imprimir" onclick="window.print()">🖨️ Imprimir / Salvar PDF</button>
@@ -403,6 +420,7 @@ function fmt(v){
 function onGrupo(){
   const g = parseInt(document.getElementById('f-grupo').value);
   const el = document.getElementById('grupo-info');
+  atualizarObsDisponiveis();
   if(!g||!GRUPOS[g]){el.style.display='none';return;}
   const d = GRUPOS[g];
   const bem = d.bem==='imovel'?'Imóvel':'Automóvel';
@@ -599,6 +617,8 @@ function calcular(){
     const lanceCell = m.lance !== null
       ? `<div class="cel-valor">${fmt(m.lance)}</div><div class="cel-sub">${m.parcelas} parcelas</div>${embutidoInfo}`
       : '<div class="cel-vazio">—</div>';
+    const obsTxt = getObs(m.tipo);
+    const obsHTML = obsTxt ? `<div class="mod-obs"><span class="mod-obs-rot">Observação:</span> ${escHTML(obsTxt)}</div>` : '';
     const bolsoCell = m.doBolso > 0
       ? `<div class="cel-bolso">${fmt(m.doBolso)}</div>`
       : (m.tipo !== 'sorteio' ? '<div class="cel-sub-forte">Descontado do crédito</div>' : '<div class="cel-vazio">—</div>');
@@ -613,6 +633,7 @@ function calcular(){
         <div class="mc-col">${bolsoCell}</div>
         <div class="mc-col"><div class="cel-credito">${fmt(m.credito)}</div></div>
         <div class="mc-col"><div class="cel-parcela">${fmt(m.parcela)}</div><div class="cel-sub">${m.meses} meses</div></div>
+        ${obsHTML}
       </div>`;
   }).join('');
 
@@ -690,6 +711,67 @@ function toggleMobile(showSidebar){
   }
 }
 
+// ===== OBSERVAÇÕES POR MODALIDADE =====
+const OBS_MODS = [
+  ['sorteio','Sorteio'],
+  ['limitado','Lance Limitado'],
+  ['fid1','Fidelidade 1'],
+  ['fid2','Fidelidade 2'],
+  ['fid3','Fidelidade 3'],
+  ['livre','Lance Livre']
+];
+
+function renderObsLista(){
+  const box = document.getElementById('obs-lista');
+  box.innerHTML = OBS_MODS.map(([tipo, nome]) => `
+    <div class="obs-item" id="obs-item-${tipo}">
+      <label class="obs-toggle"><input type="checkbox" id="obs-chk-${tipo}" onchange="onObsToggle('${tipo}')"> ${nome}</label>
+      <textarea id="obs-txt-${tipo}" rows="3" maxlength="300" style="display:none" oninput="obsLive()" placeholder="Ex: Lance máximo já ofertado. Em agosto houve 43 ofertas empatadas; desempate pela cota mais próxima do sorteio."></textarea>
+    </div>`).join('');
+}
+
+function onObsToggle(tipo){
+  const on = document.getElementById('obs-chk-'+tipo).checked;
+  const txt = document.getElementById('obs-txt-'+tipo);
+  txt.style.display = on ? 'block' : 'none';
+  if(on) txt.focus();
+  obsLive();
+}
+
+// Texto da observação (só se ativada e preenchida)
+function getObs(tipo){
+  const chk = document.getElementById('obs-chk-'+tipo);
+  const txt = document.getElementById('obs-txt-'+tipo);
+  if(!chk || !txt || !chk.checked) return '';
+  return txt.value.trim();
+}
+
+// Esconde observações de modalidades que o grupo não tem
+function atualizarObsDisponiveis(){
+  const g = parseInt(document.getElementById('f-grupo').value);
+  const d = g && GRUPOS[g] ? GRUPOS[g] : null;
+  const disp = {sorteio:true, livre:true,
+    limitado: d ? !!d.limitado : true,
+    fid1: d ? !!d.fid1 : true,
+    fid2: d ? !!d.fid2 : true,
+    fid3: d ? !!d.fid3 : true};
+  OBS_MODS.forEach(([tipo]) => {
+    const item = document.getElementById('obs-item-'+tipo);
+    if(item) item.style.display = disp[tipo] ? 'block' : 'none';
+  });
+}
+
+// Atualiza a folha ao digitar (só desktop e se já houver simulação calculada)
+function obsLive(){
+  if(window.innerWidth<=768) return;
+  if(document.getElementById('pagina').style.display!=='flex') return;
+  calcular();
+}
+
+function escHTML(t){
+  return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
 // ===== FOCO =====
 const FOCOS = {
   todas: {
@@ -765,6 +847,7 @@ async function carregarGruposCSV() {
 const hoje = new Date();
 document.getElementById('f-mes').value = hoje.getMonth()+1;
 document.getElementById('f-ano').value = hoje.getFullYear();
+renderObsLista();
 carregarGruposCSV();
 </script>
 </body>
